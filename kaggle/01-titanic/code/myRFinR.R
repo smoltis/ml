@@ -1,11 +1,12 @@
-library(dplyr) # for data munging
-library(randomForest)
+ipir <- function(names){
+  for( pname in names )
+  if (!require(pname,character.only = TRUE)) {
+    install.packages(pname)
+    require( pname , character.only = TRUE )
+  }
+}
 
-library(rpart) #for decsion tree and pretty plotting
-library(rattle)
-library(rpart.plot)
-library(RColorBrewer)
-
+ipir(c("RGtk2","dplyr", "randomForest","rpart","rattle","rpart.plot","RColorBrewer","party"))
 
 #create submit func to save typing
 submit = function(filename){
@@ -352,8 +353,7 @@ write.csv(submit, file = "../answer/firstRforest.csv", row.names = FALSE)
 
 # Conditional inference trees.
 #
-#install.packages('party')
-library(party)
+
 # Conditional inference trees are able to handle factors with 
 # more levels than Random Forests can, so let’s go back to 
 # out original version of FamilyID. 
